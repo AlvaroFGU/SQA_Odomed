@@ -14,29 +14,48 @@ class TestLogin:
    def teardown_method(self):
       self.driver.quit()
 
-   def test_inicio_sesion(self):
-      self.driver.find_element(By.XPATH, "//button[text() = 'Ingresar']").click()
-      time.sleep(1)
-      self.driver.find_element(By.XPATH, "//input[@type='email']").send_keys('PACIENTE123333@GMAIL.COM')
-      self.driver.find_element(By.XPATH, "//input[@type='password']").send_keys('qwerty123@')
-      self.driver.find_element(By.XPATH, "//button[@type='submit']").click()
-      time.sleep(10)
-      logo = self.driver.find_element(By.XPATH, "//img[@alt='OdontoMed Logo']").is_displayed()
-      assert logo, f'El logo de la pagina de administrador no se encontro'
+   #def test_inicio_sesion(self):
+   #   self.driver.find_element(By.XPATH, "//button[text() = 'Ingresar']").click()
+   #   time.sleep(1)
+   #   self.driver.find_element(By.XPATH, "//input[@type='email']").send_keys('PACIENTE123333@GMAIL.COM')
+   #   self.driver.find_element(By.XPATH, "//input[@type='password']").send_keys('qwerty123@')
+   #   self.driver.find_element(By.XPATH, "//button[@type='submit']").click()
+   #   time.sleep(10)
+   #   logo = self.driver.find_element(By.XPATH, "//img[@alt='OdontoMed Logo']").is_displayed()
+   #   assert logo, f'El logo de la pagina de administrador no se encontro'
+#
+   #def test_cerrar_sesion(self):
+   #   self.driver.find_element(By.XPATH, "//button[text() = 'Ingresar']").click()
+   #   time.sleep(1)
+   #   self.driver.find_element(By.XPATH, "//input[@type='email']").send_keys('PACIENTE123333@GMAIL.COM')
+   #   self.driver.find_element(By.XPATH, "//input[@type='password']").send_keys('qwerty123@')
+   #   self.driver.find_element(By.XPATH, "//button[@type='submit']").click()
+   #   time.sleep(10)
+   #   self.driver.find_element(By.XPATH, "//*[@aria-label = ' avatar']").click()
+   #   time.sleep(1)
+   #   self.driver.find_element(By.XPATH, "//div[@aria-orientation]//child::button[text() = 'Cerrar sesión']").click()
+   #   time.sleep(1)
+   #   boton_ingresar = self.driver.find_element(By.XPATH, "//button[text() = 'Ingresar']").is_displayed()
+   #   assert boton_ingresar, f'El boton ingresar de la pagina de inicio no se encontro'
 
-   def test_cerrar_sesion(self):
+   
+   def test_recuperar_contrasenia(self):
       self.driver.find_element(By.XPATH, "//button[text() = 'Ingresar']").click()
       time.sleep(1)
-      self.driver.find_element(By.XPATH, "//input[@type='email']").send_keys('PACIENTE123333@GMAIL.COM')
-      self.driver.find_element(By.XPATH, "//input[@type='password']").send_keys('qwerty123@')
-      self.driver.find_element(By.XPATH, "//button[@type='submit']").click()
-      time.sleep(10)
-      self.driver.find_element(By.XPATH, "//*[@aria-label = ' avatar']").click()
+      self.driver.find_element(By.XPATH, "//button[text() = '¿Olvidaste tu contraseña?']").click()
       time.sleep(1)
-      self.driver.find_element(By.XPATH, "//div[@aria-orientation]//child::button[text() = 'Cerrar sesión']").click()
+      self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys('alvarofredgonza18@gmail.com')
+      self.d = webdriver.Chrome()
+      self.d.get('https://workspace.google.com/intl/es-419/gmail/')
+      self.d.find_element(By.XPATH, "//div[@class = 'header__aside']//a[@aria-label = 'Acceder a Gmail']").click()
       time.sleep(1)
-      boton_ingresar = self.driver.find_element(By.XPATH, "//button[text() = 'Ingresar']").is_displayed()
-      assert boton_ingresar, f'El boton ingresar de la pagina de inicio no se encontro'
+      self.d.find_element(By.XPATH, "//input[@type = 'email']").send_keys('alvarofredgonza18@gmail.com')
+      self.d.find_element(By.XPATH, "//span[text()= 'Siguiente']").click()
+      self.d.find_element(By.XPATH, "//input[@type= 'password']").send_keys('FredGonz210404')
+
+   #//tr//span[text() = 'Código de Recuperación de Contraseña']//parent::div[@class = 'afn']
+   #locator para mensajes de email
+
 
    #def test_inicio_sesion(self):
    #   inicio_sesion = LoginPage(self.driver)
