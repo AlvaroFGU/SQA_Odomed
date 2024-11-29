@@ -19,24 +19,24 @@ class TestLogin:
       logo = self.login_page.logo_visible()
       assert logo, f'El logo de la pagina de administrador no se encontro'
 
-   def taest_inicio_sesion_mal(self):
+   def test_inicio_sesion_mal(self):
       self.login_page.login(False)
       logo = self.login_page.logo_visible()
       assert not logo, f'El logo de la pagina de administrador si se encontro'
 
-   def taest_cerrar_sesion(self):
+   def test_cerrar_sesion(self):
       self.login_page.login(True)
       self.login_page.cerrar_sesion()
       boton_ingresar = self.login_page.titulo()
       assert boton_ingresar, f'El boton ingresar de la pagina de inicio no se encontro'
 
-   def taest_recuperar_contrasenia(self):
+   def test_recuperar_contrasenia(self):
       self.login_page.ingresar()
       self.login_page.olvidar_contraseña(True)
       titulo_cod = self.login_page.ver_contra()
       assert titulo_cod, f'El titulo de virificar contraseña no se ve'
 
-   def taest_recuperar_contrasenia_mal(self):
+   def test_recuperar_contrasenia_mal(self):
       self.login_page.ingresar()
       self.login_page.olvidar_contraseña(False)
       titulo_cod = self.login_page.ver_cod()
