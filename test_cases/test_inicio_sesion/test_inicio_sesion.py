@@ -14,7 +14,7 @@ class TestLogin:
    def teardown_method(self):
       self.driver.quit()
 
-   def taest_inicio_sesion(self):
+   def test_inicio_sesion(self):
       self.login_page.login(True)
       logo = self.login_page.logo_visible()
       assert logo, f'El logo de la pagina de administrador no se encontro'
