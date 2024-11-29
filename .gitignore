@@ -1,0 +1,8 @@
+.venv
+env
+.pytest_cache
+page_elements\__pycache__
+page_elements\login\__init__.py
+test_cases\.pytest_cache
+test_cases\test_inicio_sesion\__init__.py
+test_cases\test_nombre_modulo\__pycache__
