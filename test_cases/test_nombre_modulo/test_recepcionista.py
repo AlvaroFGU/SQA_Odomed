@@ -9,7 +9,7 @@ import time
 class TestModulo:
     def setup_method(self):
         self.driver = webdriver.Chrome()
-        self.driver.maximize_window()
+        #self.driver.maximize_window()
         self.driver.get('http://localhost:3000/')
         time.sleep(0.5)
         self.login_page = LoginPageRecep(self.driver)
@@ -44,7 +44,9 @@ class TestModulo:
         self.driver.find_element(By.XPATH, "//input[@placeholder='Alergias']").send_keys("Productos altos en ph")
         self.driver.find_element(By.XPATH, "//textarea[@placeholder = 'Antecedentes Médicos']").clear()
         self.driver.find_element(By.XPATH, "//textarea[@placeholder = 'Antecedentes Médicos']").send_keys("SI")
-
+        self.driver.find_element(By.XPATH,"//footer[@class='chakra-modal__footer css-k0waxj']/button[@class='chakra-button css-nhals4']").click()
+        time.sleep(1)
+        
 
 
 
