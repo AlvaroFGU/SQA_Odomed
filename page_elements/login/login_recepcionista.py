@@ -15,22 +15,15 @@ class LoginPageRecep:
         self.driver.find_element(By.XPATH, "//button[text() ='Ingresar']").click()
         time.sleep(2)
 
-    def enter_email(self):
+    def ingresar_credenciales(self):
         email_field = self.driver.find_element(By.XPATH, "//input[@type = 'email']")
         email_field.clear()
         email_field.send_keys(self.default_email)
-
-    def enter_password(self):
         password_field = self.driver.find_element(By.XPATH, "//input[@type = 'password']")
         password_field.clear()
         password_field.send_keys(self.default_password)
-
-    def submit(self):
-        login_button = self.driver.find_element(By.XPATH, "//button[@type = 'submit']")
-        login_button.click()
+        self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
 
     def login(self):
         self.enter_to_login()
-        self.enter_email()
-        self.enter_password()
-        self.submit()
+        self.ingresar_credenciales()
