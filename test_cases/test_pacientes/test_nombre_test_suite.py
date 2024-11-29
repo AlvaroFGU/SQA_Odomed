@@ -47,9 +47,9 @@ class TestModulo:
         time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='Teléfono']").send_keys("71234568")
         time.sleep(0.5)
-        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys("03-mar-2003")
+        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys("03-03-2003")
         time.sleep(0.5)
-        self.driver.find_element(By.XPATH, "//input[@placeholder='Dirección']").send_keys("Calle testeo, 4332")
+        self.driver.find_element(By.XPATH, "//input[@placeholder='Dirección']").send_keys("Calle testeo. 4332")
         time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//body").send_keys(Keys.SPACE)
         time.sleep(0.5)
@@ -76,7 +76,7 @@ class TestModulo:
         self.driver.find_element(By.XPATH, "//textarea[@placeholder = 'Notas Generales']").send_keys("SI")
         time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//footer//button[1]").click()
-        time.sleep(8)
+        time.sleep(30)
 
 
 
