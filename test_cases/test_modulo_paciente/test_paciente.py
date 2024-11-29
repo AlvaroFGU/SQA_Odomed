@@ -28,3 +28,25 @@ class TestModulo:
         self.paciente.enviar_form()
         creado = self.paciente.verificar_pacientecreado()
         assert creado, f'El paciente no se creo correctamente'
+    
+    def test_ver_historial(self):
+        self.paciente.boton_historial()
+        esperado = self.paciente.text_datos_personales()
+        assert esperado, f'El boton de datos personales no se ve'
+    
+    def test_historial_navbar_historial(self):
+        self.paciente.boton_historial()
+        self.paciente.nav_bar_historial()
+
+    def test_historial_navbar_tratamientos(self):
+        self.paciente.boton_historial()
+        self.paciente.nav_bar_tratamientos()
+
+    def test_historial_navbar_prescripciones(self):
+        self.paciente.boton_historial()
+        self.paciente.nav_bar_prescripciones()
+
+    def test_editar_datos_personales(self):
+        self.paciente.boton_historial()
+        mensaje = self.paciente.editar_datos_personales()
+        assert mensaje, f'El mensaje de exito no se muestra'

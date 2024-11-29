@@ -8,18 +8,18 @@ import time
 class LoginPageAdmin:
     def __init__(self, driver):
         self.driver = driver
-        self.default_email = 'PACIENTE123333@GMAIL.COM'
-        self.default_password = 'qwerty123@'
+        self.def_email = 'PACIENTE123333@GMAIL.COM'
+        self.def_contra = 'qwerty123@'
 
     def ingresar(self):
         self.driver.find_element(By.XPATH, "//button[text() ='Ingresar']").click()
         time.sleep(1)
 
     def email(self):
-        self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
+        self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.def_email)
         
     def contra_correcta(self):
-        self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
+        self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.def_contra)
 
     def contra_incorrecta(self):
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys('hola')

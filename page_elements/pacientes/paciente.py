@@ -50,9 +50,59 @@ class ModuloPaciente:
             return  True
         return False
 
-    
+    def boton_historial(self):
+        self.driver.find_element(By.XPATH, "//button[@class = 'chakra-button css-jn2gtv'][1]").click()
+        time.sleep(10)
 
-        
+    def text_datos_personales(self):
+        try: 
+            boton = self.driver.find_element(By.XPATH, "//button[text()= 'DATOS PERSONALES']").is_displayed()
+        except:
+            boton = False
+        finally:
+            return boton
     
+    def nav_bar_historial(self):
+        self.driver.find_element(By.XPATH, "//button[text()= 'HISTORIAL CLINICO']").click()
+        time.sleep(1)
+        try:
+            boton = self.driver.find_element(By.XPATH, "//button[text()= 'EDITAR DATOS DEL HISTORIAL']").is_displayed()
+        except:
+            boton = False
+        finally:
+            return boton
         
-
+    def nav_bar_tratamientos(self):
+        self.driver.find_element(By.XPATH, "//button[text()= 'TRATAMIENTOS']").click()
+        time.sleep(1)
+        try:
+            boton = self.driver.find_element(By.XPATH, "//button[text()= 'CREAR NUEVO TRATAMIENTO']").is_displayed()
+        except:
+            boton = False
+        finally:
+            return boton
+        
+    def nav_bar_prescripciones(self):
+        self.driver.find_element(By.XPATH, "//button[text()= 'PRESCRIPCIÓNES']").click()
+        time.sleep(1)
+        try:
+            boton = self.driver.find_element(By.XPATH, "//button[text()= 'CREAR NUEVA PRESCRIPCIÓN']").is_displayed()
+        except:
+            boton = False
+        finally:
+            return boton
+    
+    def editar_datos_personales(self):
+        self.driver.find_element(By.XPATH, "//button[text()= 'EDITAR DATOS PERSONALES']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//label[text() = 'Dirección']//following-sibling::input").clear()
+        self.driver.find_element(By.XPATH, "//label[text() = 'Dirección']//following-sibling::input").send_keys('Edicion sqa')
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
+        time.sleep(3)
+        try:
+            mensaje = self.driver.find_element(By.XPATH, "//div[text() = 'Datos personales actualizados.']").is_displayed()
+        except:
+            mensaje = False
+        finally:
+            return mensaje
