@@ -5,15 +5,15 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 import time
 
-class LoginPageRecep:
+class LoginPageOdo:
     def __init__(self, driver):
         self.driver = driver
-        self.default_email = "RECEP@GMAIL.COM"
-        self.default_password = "qwerty123@"
+        self.default_email = "GAA2025817@EST.UNIVALLE.EDU"
+        self.default_password = "Qwerty123@"
 
     def enter_to_login(self):
         self.driver.find_element(By.XPATH, "//button[text() ='Ingresar']").click()
-        time.sleep(2)
+        time.sleep(1)
 
     def ingresar_credenciales(self):
         email_field = self.driver.find_element(By.XPATH, "//input[@type = 'email']")
