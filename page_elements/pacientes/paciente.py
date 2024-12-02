@@ -284,4 +284,24 @@ class ModuloPaciente:
         time.sleep(1)
         alert = Alert(self.driver)
         alert.accept()
-        return self.wait_locator("//div[text() = 'Medicamento eliminado.']")     
+        return self.wait_locator("//div[text() = 'Medicamento eliminado.']")
+
+    def eliminar_paciente(self):
+        WebDriverWait(self.driver, 15).until(
+            EC.visibility_of_element_located((By.XPATH, "//thead"))
+        )
+        self.driver.find_element(By.XPATH, "//button[text() = 'SIGUIENTE']").click()
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, "//button[@class = 'chakra-button css-spmwho'][1]").click()
+        time.sleep(1)
+        alert = Alert(self.driver)
+        alert.accept()
+        return self.wait_locator("//div[text() = 'Paciente eliminado.']")
+
+    def paginacion(self):
+        WebDriverWait(self.driver, 15).until(
+            EC.visibility_of_element_located((By.XPATH, "//thead"))
+        )
+        self.driver.find_element(By.XPATH, "//button[text() = 'SIGUIENTE']").click()
+        return self.wait_locator("//button[@class = 'chakra-button css-spmwho'][1]")
+

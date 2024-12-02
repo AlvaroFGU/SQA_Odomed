@@ -102,3 +102,13 @@ class TestModulo:
     def test_eliminar_prescripcion(self):
         mensaje = self.paciente.eliminar_prescripcion()
         assert mensaje, f'El mensaje de exito no se muestra'
+
+    def test_paginacion(self):
+        pagina = self.paciente.paginacion()
+        assert pagina, f'La paginacion no existe'
+
+    def test_eliminar_paciente(self):
+        mensaje = self.paciente.eliminar_paciente()
+        assert mensaje, f'El mensaje de exito no se muestra'
+
+    
