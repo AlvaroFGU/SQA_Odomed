@@ -71,7 +71,9 @@ class ModuloPaciente:
 
     def boton_historial(self):
         self.driver.find_element(By.XPATH, "//button[@class = 'chakra-button css-jn2gtv'][1]").click()
-        time.sleep(10)
+        WebDriverWait(self.driver, 15).until(
+            EC.visibility_of_element_located((By.XPATH, "//header"))
+        )
 
     def text_datos_personales(self):
         try:
@@ -207,4 +209,79 @@ class ModuloPaciente:
         alert.accept()
         return self.wait_locator("//div[text() = 'Diagnostico eliminado.']")
 
+    def crear_tratamiento(self):
+        self.boton_historial()
+        self.driver.find_element(By.XPATH, "//button[text()= 'TRATAMIENTOS']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//button[text() = 'CREAR NUEVO TRATAMIENTO']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//input[@id = 'field-:rh:']").send_keys('Tratamiento sqa')
+        self.driver.find_element(By.XPATH, "//textarea").send_keys('descripcion sqa')
+        self.driver.find_element(By.XPATH, "//input[@type= 'date']").send_keys('15-12-2024')
+        self.driver.find_element(By.XPATH, "//input[@type= 'number']").send_keys('100')
+        self.driver.find_element(By.XPATH, "//button[text() = 'Crear']").click()
+        return self.wait_locator("//div[text() = 'Tratamiento creado.']")
 
+    def editar_tratamiento(self):
+        self.boton_historial()
+        self.driver.find_element(By.XPATH, "//button[text()= 'TRATAMIENTOS']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//p[text() = 'TRATAMIENTO SQA'][1]//following-sibling::button[text()]").click()
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "//textarea").send_keys(' editado')
+        self.driver.find_element(By.XPATH, "//button[text() = 'Guardar']").click()
+        return self.wait_locator("//div[text() = 'Tratamiento actualizado.']")
+
+    def eliminar_tratamiento(self):
+        self.boton_historial()
+        self.driver.find_element(By.XPATH, "//button[text()= 'TRATAMIENTOS']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//p[text() = 'TRATAMIENTO SQA'][1]//following-sibling::button[@class = 'chakra-button css-17gj2bt']").click()
+        time.sleep(1)
+        alert = Alert(self.driver)
+        alert.accept()
+        return self.wait_locator("//div[text() = 'Tratamiento eliminado.']")
+    
+    def crear_prescripcion(self):
+        self.boton_historial()
+        self.driver.find_element(By.XPATH, "//button[text()= 'PRESCRIPCIÓNES']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//button[text() = 'CREAR NUEVA PRESCRIPCIÓN']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//input[@name = 'nombre_medicamento']").send_keys('medicamento sqa 1')
+        self.driver.find_element(By.XPATH, "//input[@name = 'dosis']").send_keys('dosis sqa')
+        self.driver.find_element(By.XPATH, "//input[@name= 'fecha_fin']").send_keys('15-12-2024')
+        self.driver.find_element(By.XPATH, "//button[text() = 'Añadir a la lista']").click()
+        self.driver.find_element(By.XPATH, "//input[@name = 'nombre_medicamento']").send_keys('medicamento sqa 2')
+        self.driver.find_element(By.XPATH, "//input[@name = 'dosis']").send_keys('dosis sqa')
+        self.driver.find_element(By.XPATH, "//input[@name= 'fecha_fin']").send_keys('15-12-2024')
+        self.driver.find_element(By.XPATH, "//button[text() = 'Añadir a la lista']").click()
+        self.driver.find_element(By.XPATH, "//input[@name = 'nombre_medicamento']").send_keys('medicamento sqa 3')
+        self.driver.find_element(By.XPATH, "//input[@name = 'dosis']").send_keys('dosis sqa')
+        self.driver.find_element(By.XPATH, "//input[@name= 'fecha_fin']").send_keys('15-12-2024')
+        self.driver.find_element(By.XPATH, "//button[text() = 'Añadir a la lista']").click()
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "//button[@class = 'chakra-button css-1wqgnr1'][1]").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//button[text() = 'Crear']").click()
+        return self.wait_locator("//div[text() = 'Prescripcion creado.']")
+
+    def editar_prescripcion(self):
+        self.boton_historial()
+        self.driver.find_element(By.XPATH, "//button[text()= 'PRESCRIPCIÓNES']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//button[text() = 'EDITAR PRESCRIPCIÓN'][1]").click()
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "//label[text() = 'Dosis']//following-sibling::input").send_keys(' editado')
+        self.driver.find_element(By.XPATH, "//button[text() = 'Guardar']").click()
+        return self.wait_locator("//div[text() = 'Prescripción actualizada']")
+
+    def eliminar_prescripcion(self):
+        self.boton_historial()
+        self.driver.find_element(By.XPATH, "//button[text()= 'PRESCRIPCIÓNES']").click()
+        time.sleep(1)
+        self.driver.find_element(By.XPATH, "//button[@class = 'chakra-button css-17gj2bt'][1]").click()
+        time.sleep(1)
+        alert = Alert(self.driver)
+        alert.accept()
+        return self.wait_locator("//div[text() = 'Medicamento eliminado.']")     
