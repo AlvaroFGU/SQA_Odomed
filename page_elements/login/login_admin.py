@@ -73,15 +73,15 @@ class LoginPageAdmin:
         else:
             self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys('emailinvalido@est.univalle.edu')
         self.driver.find_element(By.XPATH, "//button[text()= 'Enviar Código de Recuperación']").click()
-        time.sleep(10)
         
     def ver_cod(self):
         try:
-            titulo_cod = self.driver.find_element(By.XPATH, "//p[text()= 'Verificar Código']").is_displayed()
+            elemento = WebDriverWait(self.driver, 15).until(
+                EC.visibility_of_element_located((By.XPATH, "//p[text()= 'Verificar Código']"))
+            )
+            return elemento.is_displayed()
         except:
-            titulo_cod = False
-        finally:
-            return titulo_cod
+            return False
         
     def ver_contra(self):
         self.driver.find_element(By.XPATH, "//button[@class= 'chakra-button css-1xgetim']").click()

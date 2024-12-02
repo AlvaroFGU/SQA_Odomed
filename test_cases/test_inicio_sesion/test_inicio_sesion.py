@@ -20,7 +20,9 @@ class TestLogin:
       assert logo, f'El logo de la pagina de administrador no se encontro'
 
    def test_inicio_sesion_mal(self):
-      self.login_page.login(False)
+      self.login_page.llenar_form(False)
+      self.login_page.enviar()
+      time.sleep(5)
       logo = self.login_page.logo_visible()
       assert not logo, f'El logo de la pagina de administrador si se encontro'
 
@@ -33,8 +35,8 @@ class TestLogin:
    def test_recuperar_contrasenia(self):
       self.login_page.ingresar()
       self.login_page.olvidar_contraseña(True)
-      titulo_cod = self.login_page.ver_contra()
-      assert titulo_cod, f'El titulo de virificar contraseña no se ve'
+      titulo_cod = self.login_page.ver_cod()
+      assert titulo_cod, f'El titulo de verificar contraseña no se ve'
 
    def test_recuperar_contrasenia_mal(self):
       self.login_page.ingresar()
