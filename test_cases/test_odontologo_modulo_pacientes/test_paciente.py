@@ -25,14 +25,20 @@ class TestPaciente:
         print("Prueba finalizada")
 
     def test_crear_paciente(self):
-        self.odo_page.ingresar_form_crear_paciente()
         self.odo_page.llenar_form_crear_paciente()
-        self.odo_page.enviar_formulario_paciente()
-        actual = self.odo_page.buscar_paciente_creado()
+        self.odo_page.buscar_paciente_creado_byCi()
+        actual = self.odo_page.verif_pcnt_creado()
         esperado = self.odo_page.ci_user_test
+        
+        print(self.odo_page.ci_user_test)
+        print(self.odo_page.email_user_test)
         assert actual in esperado, f"ERROR, esperado: {esperado}, actual: {actual}"
 
+    # def test_verif_info_pcnt(self):
+    #     self.odo_page.buscar_paciente_creado_byCi(self.ci)
+    #     self.odo_page.ingresar_a_infPcnt()
+    #     actual = self.odo_page.verif_pcnt_datosPersonales()
+    #     esperado = self.odo_page.ci_user_test
+    #     assert actual in esperado, f"ERROR: esperado: {esperado}, actual: {actual}"
 
-
-
-
+    

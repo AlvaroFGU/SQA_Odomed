@@ -32,49 +32,50 @@ class Odontologo:
         time.sleep(0.5)
 
     def llenar_form_crear_paciente(self):
+        self.ingresar_form_crear_paciente()
         nomPacient= "Raul Alejandro"
         self.driver.find_element(By.XPATH, "//input[@placeholder='Nombres']").send_keys(f"{nomPacient}")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='Apellidos']").send_keys("Hernandez")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='C.I.']").send_keys(f"{self.ci_user_test}")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='Email']").send_keys(f"{self.email_user_test}")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='Teléfono']").send_keys("71234568")
-        time.sleep(0.5)
-        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys("03-03-2003")
-        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys("03")
+        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys("03")
+        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys(Keys.ARROW_RIGHT)
+        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys("2003")
         self.driver.find_element(By.XPATH, "//input[@placeholder='Dirección']").send_keys("Calle testeo. 4332")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//body").send_keys(Keys.SPACE)
         self.driver.find_element(By.XPATH, "//body").send_keys(Keys.SPACE)
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='Contraseña']").send_keys("Qwerty123@")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[contains(@placeholder, 'Codigo')]").send_keys("Rp123456")
-        time.sleep(0.5)
-        self.driver.find_element(By.XPATH, "//input[@placeholder='Alergias']").clear()
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//input[@placeholder='Alergias']").send_keys("Productos altos en ph")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//textarea[@placeholder = 'Antecedentes Médicos']").send_keys("SI")
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//select").click()
         time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//option[@value ='1']").click()
         time.sleep(0.5)
-        self.driver.find_element(By.XPATH, "//textarea[@placeholder = 'Notas Generales']").clear()
-        time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//textarea[@placeholder = 'Notas Generales']").send_keys("SI")
-
-    def enviar_formulario_paciente(self):
         time.sleep(0.5)
         self.driver.find_element(By.XPATH, "//footer//button[1]").click()
-        time.sleep(6)
+        time.sleep(10)
 
-    def buscar_paciente_creado(self):
+    def buscar_paciente_creado_byCi(self):
+        time.sleep(4)
         self.driver.find_element(By.XPATH, "//input[@value]").send_keys(f"{self.ci_user_test}")
         time.sleep(1)
+        
+    
+    def verif_pcnt_creado(self):
         actual = self.driver.find_element(By.XPATH, "//td[2]").text
         return actual
+    
+    def ingresar_a_infPcnt(self):
+        time.sleep(3)
+        self.driver.find_element(By.XPATH, "//button[contains(@class, 'css-jn2gtv')]").click()
+        time.sleep(7)
+        
+    def verif_pcnt_datosPersonales(self):
+        actual = self.driver.find_element(By.XPATH, "//strong[text()='CI:']//parent::p").text
+        return actual
+    
+    
