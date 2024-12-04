@@ -88,3 +88,21 @@ def test_delete_cita(appium_driver):
     linear_layouts_after = apponts_galery.find_elements(By.CLASS_NAME, "android.widget.LinearLayout")
     final_count = len(linear_layouts_after)
     assert final_count == initial_count - 1, "No se eliminó la cita correctamente."
+def test_ver_historial(appium_driver):
+    login(appium_driver, "PACIENTE@GMAIL.COM", "qwerty123@")
+    menu_button = appium_driver.find_element(By.XPATH, "//android.widget.ImageButton[@content-desc='Abrir panel lateral de navegación']")
+    menu_button.click()
+    time.sleep(5)
+    appointments_tab = appium_driver.find_element(By.XPATH, "//android.widget.CheckedTextView[@resource-id='com.example.odomedapp:id/design_menu_item_text' and @text='Historial de Citas']")
+    appointments_tab.click()
+    time.sleep(5)
+    histo_tab=appium_driver.find_element(By.XPATH,"//androidx.recyclerview.widget.RecyclerView[@resource-id='com.example.odomedapp:id/recyclerViewUsers']")
+    assert histo_tab.is_displayed()
+def test_logout(appium_driver):
+    login(appium_driver, "PACIENTE@GMAIL.COM", "qwerty123@")
+    menu_button = appium_driver.find_element(By.XPATH, "//android.widget.ImageButton[@content-desc='Abrir panel lateral de navegación']")
+    menu_button.click()
+    time.sleep(5)
+    logOUT_B=appium_driver.find_element(By.XPATH,"//android.widget.CheckedTextView[@resource-id='com.example.odomedapp:id/design_menu_item_text' and @text='Cerrar Sesión']")
+    logOUT_B.click()
+    assert logOUT_B.is_displayed()
