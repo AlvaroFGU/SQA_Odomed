@@ -18,7 +18,7 @@ def appium_driver():
 
 
 def login(driver, email: str, password: str):
-    time.sleep(2)
+    time.sleep(10)
     email_field = driver.find_element(By.ID, "com.example.odomedapp:id/emailEditText")
     email_field.send_keys(email)
 
@@ -36,7 +36,7 @@ def test_login(appium_driver):
     assert landing_element.is_displayed(), "El usuario no pudo iniciar sesión correctamente."
 
 
-def test_create_appointment(appium_driver):
+def test_create_cita(appium_driver):
     login(appium_driver, "PACIENTE@GMAIL.COM", "qwerty123@")
     menu_button = appium_driver.find_element(By.XPATH, "//android.widget.ImageButton[@content-desc='Abrir panel lateral de navegación']")
     menu_button.click()
@@ -44,7 +44,47 @@ def test_create_appointment(appium_driver):
     appointments_tab = appium_driver.find_element(By.XPATH, "//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='com.example.odomedapp:id/nav_gallery']")
     appointments_tab.click()
     time.sleep(5)
-    create_appointment_button = appium_driver.find_element(By.XPATH, "//android.widget.Button[@resource-id='com.example.odomedapp:id/btnCrearCita']")
-    create_appointment_button.click()
+    apponts_galery= appium_driver.find_element(By.XPATH,"//androidx.recyclerview.widget.RecyclerView[@resource-id='com.example.odomedapp:id/recyclerViewUsers']")
+    linear_layouts = apponts_galery.find_elements(By.CLASS_NAME, "android.widget.LinearLayout")
+    initial_count = len(linear_layouts)
+    create_appoint_button = appium_driver.find_element(By.XPATH, "//android.widget.Button[@resource-id='com.example.odomedapp:id/btnCrearCita']")
+    create_appoint_button.click()
     time.sleep(4)
-    assert create_appointment_button.is_displayed(), "No se pudo crear la cita correctamente."
+    appoint_button= appium_driver.find_element(By.XPATH,"//android.widget.TextView[@resource-id='com.example.odomedapp:id/fechaTextView']")
+    appoint_button.click()
+    time.sleep(3)
+    aceptal_fecha= appium_driver.find_element(By.XPATH,"//android.widget.Button[@resource-id='android:id/button1']")
+    aceptal_fecha.click()
+    time.sleep(20)
+    hora_spinner = appium_driver.find_element(By.XPATH,"//android.widget.Spinner[@resource-id='com.example.odomedapp:id/horarioSpinner']")
+    hora_spinner.click()
+    time.sleep(3)
+    selected_hora =appium_driver.find_element(By.XPATH,"(//android.widget.TextView[@resource-id='com.example.odomedapp:id/text_horario'])[1]")
+    selected_hora.click()
+    time.sleep(3)
+    guardar_button= appium_driver.find_element(By.XPATH,"//android.widget.Button[@resource-id='com.example.odomedapp:id/guardarButton']")
+    guardar_button.click()
+    time.sleep(5)
+    linear_layouts_after = apponts_galery.find_elements(By.CLASS_NAME, "android.widget.LinearLayout")
+    final_count = len(linear_layouts_after)
+    assert final_count+1 == initial_count + 1, "NO se cREO LA CITA ESTUUUUUPIDO."
+def test_delete_cita(appium_driver):
+    login(appium_driver, "PACIENTE@GMAIL.COM", "qwerty123@")
+    menu_button = appium_driver.find_element(By.XPATH, "//android.widget.ImageButton[@content-desc='Abrir panel lateral de navegación']")
+    menu_button.click()
+    time.sleep(5)
+    appointments_tab = appium_driver.find_element(By.XPATH, "//androidx.appcompat.widget.LinearLayoutCompat[@resource-id='com.example.odomedapp:id/nav_gallery']")
+    appointments_tab.click()
+    time.sleep(5)
+    apponts_galery = appium_driver.find_element(By.XPATH, "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.example.odomedapp:id/recyclerViewUsers']")
+    linear_layouts = apponts_galery.find_elements(By.CLASS_NAME, "android.widget.LinearLayout")
+    initial_count = len(linear_layouts)
+    boton_cancel_cita = appium_driver.find_element(By.XPATH, "//android.widget.Button[@resource-id='com.example.odomedapp:id/btnCancelar']")
+    boton_cancel_cita.click()
+    time.sleep(2)
+    boton_conf_ca = appium_driver.find_element(By.XPATH, "//android.widget.Button[@resource-id='com.example.odomedapp:id/btnConfirmar']")
+    boton_conf_ca.click()
+    time.sleep(10)
+    linear_layouts_after = apponts_galery.find_elements(By.CLASS_NAME, "android.widget.LinearLayout")
+    final_count = len(linear_layouts_after)
+    assert final_count == initial_count - 1, "No se eliminó la cita correctamente."
