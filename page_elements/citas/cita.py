@@ -33,6 +33,15 @@ class ModuloCitas:
             elemento = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located((By.XPATH, locator))
             )
+            return elemento.text
+        except:
+            return False
+    
+    def wait_locatorb(self, locator):
+        try:
+            elemento = WebDriverWait(self.driver, 15).until(
+                EC.visibility_of_element_located((By.XPATH, locator))
+            )
             return elemento.is_displayed()
         except:
             return False
@@ -47,7 +56,7 @@ class ModuloCitas:
         
     def ver_citas(self):
         self.driver.find_element(By.XPATH, "//p[text() = 'CITAS']").click()
-        return self.wait_locator("//tr[1]")
+        return self.wait_locatorb("//tr[1]")
         
     def fitro_odontologo(self):
         self.driver.find_element(By.XPATH, "//p[text() = 'CITAS']").click()
@@ -98,7 +107,7 @@ class ModuloCitas:
         self.driver.find_element(By.XPATH, "//option[text() = 'Programada']//parent::select").click()
         self.driver.find_element(By.XPATH, "//option[text() = 'Programada']").click()
         self.driver.find_element(By.XPATH, "//button[text() = 'Guardar']").click()
-        return self.wait_locator("//div[text() = 'Cita actualizada.']")
+        return self.wait_locator("//div[text() = 'Cita actualizada.']//following-sibling::div")
 
     def eliminar_cita(self):
         self.driver.find_element(By.XPATH, "//p[text() = 'CITAS']").click()
@@ -118,7 +127,7 @@ class ModuloCitas:
         time.sleep(1)
         alert = Alert(self.driver)
         alert.accept()
-        return self.wait_locator("//div[text() = 'Cita eliminada.']")
+        return self.wait_locator("//div[text() = 'Cita eliminada.']//following-sibling::div")
 
 
 

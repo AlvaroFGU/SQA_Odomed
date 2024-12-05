@@ -160,7 +160,16 @@ class ModuloPaciente:
         
     def wait_locator(self, locator):
         try:
-            elemento = WebDriverWait(self.driver, 15).until(
+            elemento = WebDriverWait(self.driver, 20).until(
+                EC.visibility_of_element_located((By.XPATH, locator))
+            )
+            return elemento.text
+        except:
+            return False
+        
+    def wait_locatorb(self, locator):
+        try:
+            elemento = WebDriverWait(self.driver, 20).until(
                 EC.visibility_of_element_located((By.XPATH, locator))
             )
             return elemento.is_displayed()
@@ -176,7 +185,7 @@ class ModuloPaciente:
         self.driver.find_element(By.XPATH, "//textarea").send_keys('editado')
         time.sleep(1)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
-        return self.wait_locator("//div[text() = 'Historial actualizado.']")
+        return self.wait_locator("//div[text() = 'Historial actualizado.']//following-sibling::div")
     
     def crear_diagnostico(self):
         self.boton_historial()
@@ -187,7 +196,7 @@ class ModuloPaciente:
         self.driver.find_element(By.XPATH, "//input").send_keys('prueba sqa')
         self.driver.find_element(By.XPATH, "//textarea").send_keys('descripcion sqa')
         self.driver.find_element(By.XPATH, "//button[text() = 'Crear']").click()
-        return self.wait_locator("//div[text() = 'Diagnóstico creado.']")
+        return self.wait_locator("//div[text() = 'Diagnóstico creado.']//following-sibling::div")
 
     def editar_diagnostico(self):
         self.boton_historial()
@@ -197,7 +206,7 @@ class ModuloPaciente:
         time.sleep(1)
         self.driver.find_element(By.XPATH, "//textarea").send_keys(' editado')
         self.driver.find_element(By.XPATH, "//button[text() = 'Guardar']").click()
-        return self.wait_locator("//div[text() = 'Diagnóstico actualizado.']")
+        return self.wait_locator("//div[text() = 'Diagnóstico actualizado.']//following-sibling::div")
 
     def eliminar_diagnostico(self):
         self.boton_historial()
@@ -207,7 +216,7 @@ class ModuloPaciente:
         time.sleep(1)
         alert = Alert(self.driver)
         alert.accept()
-        return self.wait_locator("//div[text() = 'Diagnostico eliminado.']")
+        return self.wait_locator("//div[text() = 'Diagnostico eliminado.']//following-sibling::div")
 
     def crear_tratamiento(self):
         self.boton_historial()
@@ -220,7 +229,7 @@ class ModuloPaciente:
         self.driver.find_element(By.XPATH, "//input[@type= 'date']").send_keys('15-12-2024')
         self.driver.find_element(By.XPATH, "//input[@type= 'number']").send_keys('100')
         self.driver.find_element(By.XPATH, "//button[text() = 'Crear']").click()
-        return self.wait_locator("//div[text() = 'Tratamiento creado.']")
+        return self.wait_locator("//div[text() = 'Tratamiento creado.']//following-sibling::div")
 
     def editar_tratamiento(self):
         self.boton_historial()
@@ -231,7 +240,7 @@ class ModuloPaciente:
         self.driver.find_element(By.XPATH, "//input[@type  = 'date']").send_keys('15-12-2024')
         self.driver.find_element(By.XPATH, "//textarea").send_keys(' editado')
         self.driver.find_element(By.XPATH, "//button[text() = 'Guardar']").click()
-        return self.wait_locator("//div[text() = 'Tratamiento actualizado.']")
+        return self.wait_locator("//div[text() = 'Tratamiento actualizado.']//following-sibling::div")
 
     def eliminar_tratamiento(self):
         self.boton_historial()
@@ -241,7 +250,7 @@ class ModuloPaciente:
         time.sleep(1)
         alert = Alert(self.driver)
         alert.accept()
-        return self.wait_locator("//div[text() = 'Tratamiento eliminado.']")
+        return self.wait_locator("//div[text() = 'Tratamiento eliminado.']//following-sibling::div")
     
     def crear_prescripcion(self):
         self.boton_historial()
@@ -265,7 +274,7 @@ class ModuloPaciente:
         self.driver.find_element(By.XPATH, "//button[@class = 'chakra-button css-1wqgnr1'][1]").click()
         time.sleep(1)
         self.driver.find_element(By.XPATH, "//button[text() = 'Crear']").click()
-        return self.wait_locator("//div[text() = 'Prescripcion creado.']")
+        return self.wait_locator("//div[text() = 'Prescripcion creado.']//following-sibling::div")
 
     def editar_prescripcion(self):
         self.boton_historial()
@@ -275,7 +284,7 @@ class ModuloPaciente:
         time.sleep(3)
         self.driver.find_element(By.XPATH, "//label[text() = 'Dosis']//following-sibling::input").send_keys(' editado')
         self.driver.find_element(By.XPATH, "//button[text() = 'Guardar']").click()
-        return self.wait_locator("//div[text() = 'Prescripción actualizada']")
+        return self.wait_locator("//div[text() = 'Prescripción actualizada']//following-sibling::div")
 
     def eliminar_prescripcion(self):
         self.boton_historial()
@@ -285,7 +294,7 @@ class ModuloPaciente:
         time.sleep(1)
         alert = Alert(self.driver)
         alert.accept()
-        return self.wait_locator("//div[text() = 'Medicamento eliminado.']")
+        return self.wait_locator("//div[text() = 'Medicamento eliminado.']//following-sibling::div")
 
     def eliminar_paciente(self):
         WebDriverWait(self.driver, 15).until(
@@ -297,12 +306,12 @@ class ModuloPaciente:
         time.sleep(1)
         alert = Alert(self.driver)
         alert.accept()
-        return self.wait_locator("//div[text() = 'Paciente eliminado.']")
+        return self.wait_locator("//div[text() = 'Paciente eliminado.']//following-sibling::div")
 
     def paginacion(self):
         WebDriverWait(self.driver, 15).until(
             EC.visibility_of_element_located((By.XPATH, "//thead"))
         )
         self.driver.find_element(By.XPATH, "//button[text() = 'SIGUIENTE']").click()
-        return self.wait_locator("//button[@class = 'chakra-button css-spmwho'][1]")
+        return self.wait_locatorb("//button[@class = 'chakra-button css-spmwho'][1]")
 

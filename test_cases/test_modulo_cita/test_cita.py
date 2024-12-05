@@ -5,6 +5,10 @@ from page_elements.login.login_admin import LoginPageAdmin
 from page_elements.citas.cita import ModuloCitas
 import time
 
+def actual_espera(actual, esperado):
+    assert actual == esperado or actual in esperado, f'Error: actual: {actual}, esperado {esperado}' 
+
+
 class TestModulo:
     def setup_method(self):
         self.driver = webdriver.Chrome()
@@ -13,32 +17,34 @@ class TestModulo:
         self.login_page = LoginPageAdmin(self.driver)
         self.cita = ModuloCitas(self.driver)
         self.login_page.login(True)
+        self.actualb = True
+        self.actual = 'exitosamente'
 
     def teardown_method(self):
         self.driver.quit()
 
     def test_ver_citas(self):
         citas = self.cita.ver_citas()
-        assert citas, f'El listado de citas no se muestra'
+        actual_espera(self.actualb, citas)
 
     def test_filtro_odontologo(self):
         filtro = self.cita.fitro_odontologo()
-        assert filtro, f'El filtro no funciono correctamente'
+        actual_espera(self.actualb, filtro)
 
     def test_filtro_fecha(self):
         filtro = self.cita.filtro_fecha()
-        assert filtro, f'El filtro no funciono correctamente'
+        actual_espera(self.actualb, filtro)
 
     def test_editar_cita(self):
         mensaje = self.cita.editar_cita()
-        assert mensaje, f'El mensaje de exito no se muestra'
+        actual_espera(self.actual, mensaje)
 
     def test_filtro_estado(self):
         filtro = self.cita.filtro_estado()
-        assert filtro, f'El filtro no funciono correctamente'
+        actual_espera(self.actualb, filtro)
     
     def test_eliminar_cita(self):
         mensaje = self.cita.eliminar_cita()
-        assert mensaje, f'El mensaje de exito no se muestra'
+        actual_espera(self.actual, mensaje)
 
 
