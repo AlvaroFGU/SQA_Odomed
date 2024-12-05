@@ -24,15 +24,16 @@ class TestInterfaz:
         self.default_prueba = 'Pruebafinal'
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[3]").click()
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2").text
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'ROL')]").click()
+        time.sleep(5)
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'ROL')]").text
         esperado = "ROLES"
         
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
@@ -45,19 +46,21 @@ class TestInterfaz:
         self.default_prueba = 'Pruebafinal'
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[3]").click()
-        modal_correct = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2")
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'ROL')]").click()
+        time.sleep(5)
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'ROL')]").text
+        esperado = "ROLES"
         
-        assert modal_correct, "ERROR: no se pudo acceder al modal correcto"
+        assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-betff9']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//*[@id='field-:r9:']").send_keys(self.default_prueba)
 
@@ -65,9 +68,10 @@ class TestInterfaz:
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//*[@id='chakra-modal-:r6:']/footer/button[1]").click()
         time.sleep(8)
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[1]").text
+        actual = self.driver.find_element(By.XPATH,"///div[contains(@class,'css-161kwbg')]").text
         esperado = "PRUEBAROL"
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
+
 
 
     def test_roles_edit(self):
@@ -76,18 +80,19 @@ class TestInterfaz:
         self.default_prueba = 'Pruebafinal'
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[3]").click()
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'ROL')]").click()
         time.sleep(5)
-        modal_correct = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2")
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'ROL')]").text
+        esperado = "ROLES"
         
-        assert modal_correct, "ERROR: no se pudo acceder al modal correcto"
+        assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
         self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[2]/div/button[1]").click()
         time.sleep(2)
@@ -97,7 +102,7 @@ class TestInterfaz:
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//footer//child::button[contains(text(),'Guard')]").click()
         time.sleep(3)
-        actual = self.driver.find_element(By.XPATH,"//*[contains(@class, 'chakra-alert__desc') and contains(@class, 'css-161kwbg')]").text
+        actual = self.driver.find_element(By.XPATH,"//div[@class='chakra-alert__desc css-161kwbg']").text
         esperado = "El rol ha sido actualizado exitosamente."
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
@@ -108,28 +113,28 @@ class TestInterfaz:
         self.default_prueba = 'Pruebafinal'
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[3]").click()
-        modal_correct = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2")
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'ROL')]").click()
         time.sleep(5)
-        assert modal_correct, "ERROR: no se pudo acceder al modal correcto"
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'ROL')]").text
+        esperado = "ROLES"
+        
+        assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
-        self.driver.find_element(By.XPATH, "//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[2]/div/button[2]").click()
+        self.driver.find_element(By.XPATH, "//button[@class='chakra-button css-jn2gtv']").click()
 
-        # Esperar el alert y aceptarlo
-        WebDriverWait(self.driver, 10).until(EC.alert_is_present())  # Esperar a que el alert aparezca
+        WebDriverWait(self.driver, 10).until(EC.alert_is_present()) 
         alert = Alert(self.driver)
-        alert.accept()  # Aceptar el alert
+        alert.accept()  
         time.sleep(3)
 
-    # Verificar el mensaje de éxito
-        actual = self.driver.find_element(By.XPATH, "//*[contains(@class, 'chakra-alert__desc') and contains(@class, 'css-161kwbg')]").text
+        actual = self.driver.find_element(By.XPATH, "//div[@class='chakra-alert__desc css-161kwbg')]").text
         esperado = "El rol ha sido eliminado exitosamente."
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 

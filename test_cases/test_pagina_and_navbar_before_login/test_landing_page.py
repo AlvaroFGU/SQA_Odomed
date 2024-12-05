@@ -15,6 +15,7 @@ class TestInterfaz:
         self.driver.quit()
         print("Prueba completada")
 
+
     def test_verify_reload_logo(self):
         self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[2]/a").click()
         time.sleep(2)

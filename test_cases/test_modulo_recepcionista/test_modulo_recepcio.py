@@ -15,6 +15,7 @@ class TestInterfaz:
         self.driver.maximize_window()
         self.driver.get('http://localhost:3000/')
 
+
     def teardown_method(self):
         self.driver.quit()
         print("Prueba completada")
@@ -25,15 +26,16 @@ class TestInterfaz:
         self.default_prueba = 'Pruebafinal'
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[4]").click()
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2").text
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'RECEP')]").click()
+        time.sleep(5)
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'RECEP')]").text
         esperado = "RECEPCIONISTAS"
 
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
