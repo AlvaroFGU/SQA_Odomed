@@ -42,7 +42,7 @@ class Odontologo:
         self.num_data = genera_num()
         self.ci_esperado = 00000
     
-    def esperar_elemento(self, by, locator, timeout=15, visible=True):
+    def esperar_elemento(self, by, locator, timeout=15):
         wait = WebDriverWait(self.driver, timeout)
         try:
             return wait.until(EC.visibility_of_element_located((by, locator)))
@@ -285,4 +285,104 @@ class Odontologo:
         esperaElem = self.esperar_elemento(By.XPATH, "//div[contains(@class,'chakra-alert__title')]")
         self.actual = esperaElem.text
         time.sleep(0.5)
+        return self.actual
+    
+    # de aqui para citas
+    
+    def ingresar_modulo_citas(self):
+        self.driver.find_element(By.XPATH, "//div[@class='css-1cu9hd1']//a[@href='/citas']").click()
+        self.esperar_elemento(By.XPATH, "//th[text()='Fecha']")
+        
+    def programar_cita(self):
+        self.ingresar_modulo_citas()
+        self.driver.find_element(By.XPATH, f"//tr[{genera_num_diag()}]//button[1]").click()
+        self.esperar_elemento(By.XPATH, "//label[text()='Estado']")
+        self.driver.find_element(By.XPATH, "//label[text()='Estado']//following-sibling::div//select").click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//header//following-sibling::div//option[@value='programada']").click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//label[text()='Paciente']//following-sibling::div//select").click()
+        esperaElem = self.esperar_elemento(By.XPATH, "//header//following-sibling::div//option[@value='23']")
+        esperaElem.click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//input[@type='number']").clear()
+        self.driver.find_element(By.XPATH, "//input[@type='number']").send_keys("50")
+        self.driver.find_element(By.XPATH, "//footer//button[1]").click()
+        esperaElem = self.esperar_elemento(By.XPATH, "//div[contains(@class,'chakra-alert__title')]")
+        self.actual = esperaElem.text
+        time.sleep(0.5)
+        return self.actual
+
+    def filtro_citas(self):
+        self.ingresar_modulo_citas()
+        self.driver.find_element(By.XPATH, "//option[contains(text(),'CITA')]//parent::select").click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//option[@value='programada']").click()
+        time.sleep(0.5)
+        esperaElem = self.esperar_elemento(By.XPATH, "//tr[1]//td[5]")
+        self.actual = esperaElem.text
+        time.sleep(1)
+        return self.actual
+
+    def eliminar_citas_retriccion_estado(self):
+        self.ingresar_modulo_citas()
+        self.driver.find_element(By.XPATH, f"//tr[1]//button[2]").click()
+        alerta = self.driver.switch_to.alert
+        time.sleep(0.5)
+        alerta.accept()
+        esperaElem = self.esperar_elemento(By.XPATH, "//div[contains(@class,'chakra-alert__title')]")
+        self.actual = esperaElem.text
+        time.sleep(0.5)
+        return self.actual
+
+    def eliminar_citas(self):
+        self.ingresar_modulo_citas()
+        self.driver.find_element(By.XPATH, f"//tr[1]//button[1]").click()
+        self.esperar_elemento(By.XPATH, "//label[text()='Estado']")
+        self.driver.find_element(By.XPATH, "//label[text()='Estado']//following-sibling::div//select").click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//header//following-sibling::div//option[@value='cancelada']").click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//label[text()='Paciente']//following-sibling::div//select").click()
+        esperaElem = self.esperar_elemento(By.XPATH, "//header//following-sibling::div//option[@value='23']")
+        esperaElem.click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//footer//button[1]").click()
+        self.esperar_elemento(By.XPATH, "//div[contains(@class,'chakra-alert__title')]")
+        self.driver.find_element(By.XPATH, "//option[contains(text(),'CITA')]//parent::select").click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, "//option[@value='cancelada']").click()
+        time.sleep(0.5)
+        esperaElem = self.esperar_elemento(By.XPATH, "//tr[1]//button[2]")
+        esperaElem.click()
+        alerta = self.driver.switch_to.alert
+        time.sleep(0.5)
+        alerta.accept()
+        esperaElem2 = self.esperar_elemento(By.XPATH, "//div[contains(@class,'chakra-alert__title')]")
+        self.actual = esperaElem2.text
+        time.sleep(0.5)
+        return self.actual
+        
+
+# de aca para el odontologo logueado
+
+    def verificar_info_odontologo_logueado(self):
+        self.driver.find_element(By.XPATH, "//span//parent::button").click()
+        self.driver.find_element(By.XPATH, "//div[@tabindex]//button[1]").click()
+        time.sleep(0.5)
+        self.actual = self.driver.find_element(By.XPATH, "//strong[text()='Email:']//parent::p").text
+        return self.actual
+        
+    def verificar_restriccion_modulo_odontologo(self):
+        self.driver.get('http://localhost:3000/odontologos')
+        esperaElem = self.esperar_elemento(By.XPATH, "//p")
+        self.actual = esperaElem.text
+        time.sleep(1)
+        return self.actual
+    
+    def verificar_restriccion_modulo_recepcionista(self):
+        self.driver.get('http://localhost:3000/recepcionistas')
+        esperaElem = self.esperar_elemento(By.XPATH, "//p")
+        self.actual = esperaElem.text
+        time.sleep(1)
         return self.actual
