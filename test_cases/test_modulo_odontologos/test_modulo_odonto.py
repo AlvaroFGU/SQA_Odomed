@@ -199,7 +199,7 @@ class TestInterfaz:
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//button[contains(text(),'Guard')]").click()
         time.sleep(3)
-        actual = self.driver.find_element(By.XPATH,"//sumarize[contains(@class, 'chakra-alert__desc')").text
+        actual = self.driver.find_element(By.XPATH,"//div[contains(@class, 'chakra-alert__desc')").text
         esperado = "El rol ha sido actualizado exitosamente."
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
@@ -232,7 +232,7 @@ class TestInterfaz:
         alert.accept()  
         time.sleep(3)
 
-        actual = self.driver.find_element(By.XPATH, "//sumarize[contains(@class, 'chakra-alert__desc')]").text
+        actual = self.driver.find_element(By.XPATH, "//div[contains(@class, 'chakra-alert__desc')").text
         esperado = "El odontólogo ha sido eliminado exitosamente."
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
         

@@ -17,7 +17,7 @@ class TestInterfaz:
 
 
     def test_verify_reload_logo(self):
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[2]/a").click()
+        self.driver.find_element(By.XPATH,"https://i.ibb.co/m6mt82H/Screenshot-2024-11-18-at-14-17-24-removebg-preview.png").click()
         time.sleep(2)
         modal_reload = self.driver.find_element(By.XPATH,"//p[contains(text(),'Acerca ')]//parent::div[@class='css-1cu9hd1']//child::p[contains(text(),'Acerca')]")
         assert modal_reload, "ERROR: El Modal no se recargo correctamente"

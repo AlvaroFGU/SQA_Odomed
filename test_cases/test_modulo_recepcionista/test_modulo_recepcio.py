@@ -54,15 +54,16 @@ class TestInterfaz:
         self.default_pruebaleste = 'Av.Silva'
         self.default_pruebalestet = 'qwerty@123'
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[4]").click()
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2").text
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'RECEP')]").click()
+        time.sleep(5)
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'RECEP')]").text
         esperado = "RECEPCIONISTAS"
 
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
@@ -70,7 +71,7 @@ class TestInterfaz:
 
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/button").click()
+        self.driver.find_element(By.XPATH,"//button[contains(text(),'CREAR')]").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//input[@placeholder='Nombres']").send_keys(self.default_prueba)
         time.sleep(2)
@@ -92,7 +93,7 @@ class TestInterfaz:
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-nhals4']").click()
         time.sleep(4)
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[1]").text
+        actual = self.driver.find_element(By.XPATH,"//td[contains(text(),'Prueba')]").text
         esperado = "Pruebafinal"
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
@@ -107,35 +108,37 @@ class TestInterfaz:
         self.default_pruebalest = '10/15/2000'
         self.default_pruebaleste = 'Av.Silva'
         self.default_pruebalestet = 'qwerty@123'
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[4]").click()
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2").text
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'RECEP')]").click()
+        time.sleep(5)
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'RECEP')]").text
         esperado = "RECEPCIONISTAS"
 
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[5]/div/button[1]").click()
+        self.driver.find_element(By.XPATH,"//td[contains(text(),'RECEPC')]//following-sibling::td//child::button[@class='chakra-button css-jn2gtv']").click()
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"/html/body/div[3]/div[3]/div/section/div/form/div/div[1]/div/input").send_keys(self.default_prueba)
+        self.driver.find_element(By.XPATH,"//input[@placeholder='Nombres']").send_keys(self.default_prueba)
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"/html/body/div[3]/div[3]/div/section/div/form/div/div[2]/div/input").send_keys(self.default_prueba)
+
+        self.driver.find_element(By.XPATH,"//input[@placeholder='Apellidos']").send_keys(self.default_prueba)
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"/html/body/div[3]/div[3]/div/section/div/form/div/div[3]/div/input").send_keys(self.default_pruebal)
+        self.driver.find_element(By.XPATH,"//input[@placeholder='C.I.']").send_keys(self.default_pruebal)
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"/html/body/div[3]/div[3]/div/section/div/form/div/div[4]/div/input").send_keys(self.default_pruebale)
+        self.driver.find_element(By.XPATH,"//input[@placeholder='Email']").send_keys(self.default_pruebale)
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"/html/body/div[3]/div[3]/div/section/div/form/div/div[5]/div/input").send_keys(self.default_pruebales)
+        self.driver.find_element(By.XPATH,"//input[@placeholder='Teléfono']").send_keys(self.default_pruebales)
         time.sleep(2)
         fecha_convertida = datetime.strptime(self.default_pruebalest, '%m/%d/%Y').strftime('%Y-%m-%d')
-        self.driver.find_element(By.XPATH, "/html/body/div[3]/div[3]/div/section/div/form/div/div[6]/div/input").send_keys(fecha_convertida)
+        self.driver.find_element(By.XPATH, "//input[@type='date']").send_keys(fecha_convertida)
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"/html/body/div[3]/div[3]/div/section/div/form/div/div[7]/div/input").send_keys(self.default_pruebaleste)
+        self.driver.find_element(By.XPATH,"//input[@placeholder='Dirección']").send_keys(self.default_pruebaleste)
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//footer//child::button[contains(text(),'Guard')]").click()
         time.sleep(3)
@@ -149,28 +152,29 @@ class TestInterfaz:
         
 
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[4]/button").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-164ku12']").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, "//input[@type = 'email']").send_keys(self.default_email)
         self.driver.find_element(By.XPATH, "//input[@type = 'password']").send_keys(self.default_password)
         self.driver.find_element(By.XPATH, "//button[@type = 'submit']").click()
         time.sleep(8)
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[1]/div[1]/div[3]/a[4]").click()
-        actual = self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/h2").text
+        self.driver.find_element(By.XPATH,"//P[contains(text(),'RECEP')]").click()
+        time.sleep(5)
+        actual = self.driver.find_element(By.XPATH,"//h2[contains(text(),'RECEP')]").text
         esperado = "RECEPCIONISTAS"
 
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
 
-        self.driver.find_element(By.XPATH, "//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[5]/div/button[2]").click()
+        self.driver.find_element(By.XPATH, "//button[@class='chakra-button css-jn2gtv']").click()
 
         WebDriverWait(self.driver, 10).until(EC.alert_is_present())  
         alert = Alert(self.driver)
         alert.accept()  
         time.sleep(3)
 
-        actual = self.driver.find_element(By.XPATH, "//*[contains(@class, 'chakra-alert__desc') and contains(@class, 'css-161kwbg')]").text
+        actual = self.driver.find_element(By.XPATH, "//div[contains(@class, 'css-161kwbg')]").text
         esperado = "El recepcionista ha sido eliminado exitosamente."
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
         

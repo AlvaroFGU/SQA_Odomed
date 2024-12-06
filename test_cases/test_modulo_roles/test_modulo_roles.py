@@ -62,11 +62,11 @@ class TestInterfaz:
 
         self.driver.find_element(By.XPATH,"//button[@class='chakra-button css-betff9']").click()
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"//*[@id='field-:r9:']").send_keys(self.default_prueba)
+        self.driver.find_element(By.XPATH,"//input[@placeholder='Nombre del rol']").send_keys(self.default_prueba)
 
-        self.driver.find_element(By.XPATH,"//*[@id='accordion-button-:rb:']/label/span[1]").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-accordion__button css-uttm9k']//child::div[contains(text(),'Roles')]").click()
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"//*[@id='chakra-modal-:r6:']/footer/button[1]").click()
+        self.driver.find_element(By.XPATH,"//button[@class='chakra-accordion__button css-uttm9k']//child::div[contains(text(),'Roles')]//parent::button//child::span[contains(text(),'Sele')]").click()
         time.sleep(8)
         actual = self.driver.find_element(By.XPATH,"///div[contains(@class,'css-161kwbg')]").text
         esperado = "PRUEBAROL"
@@ -94,11 +94,13 @@ class TestInterfaz:
         
         assert esperado in actual, f"ERROR, actual: {actual}, esperado: {esperado}"
 
-        self.driver.find_element(By.XPATH,"//*[@id='root']/div/div[2]/table/tbody/tr[5]/td[2]/div/button[1]").click()
+
+
+        self.driver.find_element(By.XPATH,"//td[contains(text(),'ODON')]//following-sibling::td//child::button[@class='chakra-button css-jn2gtv']").click()
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"//*[@id='chakra-modal--body-:r6:']/div[2]/details").click()
+        self.driver.find_element(By.XPATH,"//strong[contains(text(),'Rol')]").click()
         time.sleep(2)
-        self.driver.find_element(By.XPATH,"//*[@id='chakra-modal--body-:r6:']/div[2]/details/div/label[1]/span[2]").click()
+        self.driver.find_element(By.XPATH,"//strong[contains(text(),'Rol')]//ancestor::details//child::div//child::span[contains(text(),'Sele')]").click()
         time.sleep(2)
         self.driver.find_element(By.XPATH,"//footer//child::button[contains(text(),'Guard')]").click()
         time.sleep(3)
